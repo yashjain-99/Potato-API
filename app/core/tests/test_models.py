@@ -8,6 +8,7 @@ from django.contrib.auth import get_user_model  # Get ref to custom user models
 
 from core import models
 
+
 class ModelTests(TestCase):
     """Test Models"""
 
@@ -49,8 +50,8 @@ class ModelTests(TestCase):
         self.assertTrue(user.is_superuser)
         self.assertTrue(user.is_staff)
 
-    def test_create_reciepe(self):
-        """Test creating reciepe is successful"""
+    def test_create_recipe(self):
+        """Test creating recipe is successful"""
         user = get_user_model().objects.create_user(
             'test@example.com',
             'test123',
