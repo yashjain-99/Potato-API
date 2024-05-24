@@ -39,7 +39,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
 # mixin to allow listing func for listing models
 # generics to allow to use mixins
-class TagViewSet(mixins.UpdateModelMixin,
+class TagViewSet(mixins.DestroyModelMixin,
+                 mixins.UpdateModelMixin,
                  mixins.ListModelMixin,
                  viewsets.GenericViewSet):
     """View for manage tags APIs"""
