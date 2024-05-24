@@ -39,7 +39,9 @@ class RecipeViewSet(viewsets.ModelViewSet):
 
 # mixin to allow listing func for listing models
 # generics to allow to use mixins
-class TagViewSet(mixins.ListModelMixin, viewsets.GenericViewSet):
+class TagViewSet(mixins.UpdateModelMixin,
+                 mixins.ListModelMixin,
+                 viewsets.GenericViewSet):
     """View for manage tags APIs"""
     serializer_class = serializers.TagSerializer
     queryset = Tag.objects.all()
