@@ -66,9 +66,11 @@ class RecipeSerializer(serializers.ModelSerializer):
     def update(self, instance, validated_data):
         """Update a recipe"""
         tags = validated_data.pop('tags', None)
+        ingredients = validated_data.pop('ingredients', None)
         recipe = super().update(instance, validated_data)
         auth_user = self.context['request'].user
         recipe.tags.clear()
+        recipe.ingredients.clear()
         if(tags):
             for tag in tags:
                 tag_obj, created = Tag.objects.get_or_create(
@@ -76,6 +78,13 @@ class RecipeSerializer(serializers.ModelSerializer):
                     **tag
                 )
                 recipe.tags.add(tag_obj)
+        if(ingredients):
+            for ingredient in ingredients:
+                ingredient_obj, created = Ingredient.objects.get_or_create(
+                    user=auth_user,
+                    **ingredient
+                )
+                recipe.ingredients.add(ingredient_obj)
         recipe.save()
         return recipe
 
